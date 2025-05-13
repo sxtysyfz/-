@@ -1,0 +1,39 @@
+:root {
+    --primary: #2962ff;
+    --secondary: #1e88e5;
+    --accent: #ffd74a;
+    --dark: #1a1a1a;
+    --light: #ffffff;
+    --gray: #f8f9fa;
+    --primary-color: #2962ff; /* 定义主色 */
+    --secondary-color: #1e88e5; /* 定义次色 */
+    --bg-gradient: linear-gradient(135deg, #f5faff 0%, #ffffff 100%);
+}
+
+.announcement {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+}
+
+.announcement svg {
+  margin-right: 1rem;
+}
+
+.announcement button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.announcement button:hover {
+  background-color: #0056b3;
+}
