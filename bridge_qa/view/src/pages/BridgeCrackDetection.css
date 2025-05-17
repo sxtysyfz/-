@@ -1,0 +1,205 @@
+/* 基础样式 */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+.crack-detection-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* 图片上传区域 */
+.image-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.image-container {
+  min-height: 300px;
+  border: 2px dashed #e0e0e0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.image-container:hover {
+  border-color: #3498db;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.preview-image:hover {
+  transform: scale(1.02);
+}
+
+.empty-image-placeholder {
+  text-align: center;
+  color: #a0a0a0;
+}
+
+.empty-image-placeholder i {
+  margin-bottom: 15px;
+  color: #d0d0d0;
+}
+
+/* 上传控制按钮 */
+.upload-controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.upload-button,
+.detect-button {
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 150px;
+}
+
+.upload-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.upload-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.detect-button {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+}
+
+.detect-button:hover:not([disabled]) {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+}
+
+.detect-button[disabled] {
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.hidden {
+  display: none;
+}
+
+/* 结果区域 */
+.result-section {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+.result-title {
+  margin-top: 0;
+  color: #2c3e50;
+  font-size: 22px;
+  font-weight: 500;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.result-details {
+  padding: 15px 0;
+}
+
+.crack-detected,
+.no-crack {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.crack-detected {
+  background-color: #ffebee;
+  border-left: 4px solid #e53935;
+}
+
+.no-crack {
+  background-color: #e8f5e9;
+  border-left: 4px solid #43a047;
+}
+
+.warning-icon {
+  color: #e53935;
+  font-size: 24px;
+}
+
+.success-icon {
+  color: #43a047;
+  font-size: 24px;
+}
+
+.severity {
+  font-weight: 600;
+  color: #e53935;
+}
+
+.crack-visualization {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 错误消息 */
+.error-message {
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #ffebee;
+  color: #e53935;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 加载动画 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
