@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import './BridgeCrackDetection.css';
 
 function BridgeCrackDetection() {
@@ -7,6 +9,15 @@ function BridgeCrackDetection() {
   const [predictionResult, setPredictionResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [progress, setProgress] = useState(0); // Add this line
+
+  const handleClear = () => {
+    setSelectedImage(null);
+    setPredictionResult(null);
+    setError(null);
+    setProgress(0);
+  };
+
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -30,23 +41,36 @@ function BridgeCrackDetection() {
     setError(null);
 
     try {
-      // 这里应该是实际的API调用，此处为模拟
-      // 实际应用中，你需要替换为真实的API端点
-      const response = await axios.post(
-        'https://api.example.com/detect-cracks',
-        { image: selectedImage },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+
+      // 模拟2秒的进度条
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 1;
+        setProgress(progress);
+        if (progress >= 100) {
+          clearInterval(interval);
         }
-      );
+      }, 20);
+
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      // // 这里应该是实际的API调用，此处为模拟
+      // // 实际应用中，你需要替换为真实的API端点
+      // const response = await axios.post(
+      //   'https://api.example.com/detect-cracks',
+      //   { image: selectedImage },
+      //   {
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //   }
+      // );
 
       // 模拟API返回的结果
       // 实际返回可能包含裂缝位置、严重程度等信息
       setPredictionResult({
-        hasCrack: Math.random() > 0.5, // 模拟50%的概率有裂缝
-        severity: Math.random() > 0.5 ? '轻度' : '中度', // 随机严重程度
+        hasCrack: true, // 模拟50%的概率有裂缝
+        severity: '中度', // 随机严重程度
+        resultImage: '/img/result_bridge.jpg',
         // 在实际应用中，这里可能会有裂缝位置坐标等信息
       });
     } catch (err) {
@@ -85,6 +109,27 @@ function BridgeCrackDetection() {
             />
           </label>
 
+          {isLoading && (
+            <div className="progress-modal">
+              <div className="progress-content">
+                <CircularProgressbar
+                  value={progress}
+                  text={`${progress}%`}
+                  styles={{
+                    path: {
+                      stroke: '#00bcd4',
+                    },
+                    text: {
+                      fill: '#000',
+                      fontSize: '24px',
+                    },
+                  }}
+                />
+                <p>正在分析图片...</p>
+              </div>
+            </div>
+          )}
+
           <button
             className="detect-button"
             onClick={handleSubmit}
@@ -100,6 +145,15 @@ function BridgeCrackDetection() {
               </span>
             )}
           </button>
+
+          <button
+            className="clear-button"
+            onClick={handleClear}
+            disabled={!selectedImage && !predictionResult}
+          >
+            <i className="fa fa-trash" aria-hidden="true"></i> 清空
+          </button>
+
         </div>
       </div>
 
@@ -113,6 +167,13 @@ function BridgeCrackDetection() {
               <div className="crack-detected">
                 <i className="fa fa-exclamation-triangle warning-icon" aria-hidden="true"></i>
                 <p>检测到裂缝，严重程度: <span className="severity">{predictionResult.severity}</span></p>
+                <p><b>|  检测结果示意图：</b></p>
+                <img
+                    src={predictionResult.resultImage}
+                    alt="裂缝检测结果"
+                    className="result-image"
+                    style={{ width: '100%', maxWidth: '250px', height: 'auto' }}
+                  />
               </div>
             ) : (
               <div className="no-crack">

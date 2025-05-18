@@ -22,7 +22,7 @@ app.add_middleware(
 )
 
 client = OpenAI(api_key="sk-9c93d7bf136342168b2dd4be7d419451", base_url="https://api.deepseek.com")
-
+client_rag = OpenAI(api_key="ragflow-NmYTAzNTc2MzNhZTExZjBhNDI1NDIwMT", base_url="https://demo.ragflow.io")
 
 # 修改函数参数接收方式
 @app.post("/deepseek")
@@ -50,6 +50,7 @@ async def call_deepseek(data: dict = Body(...)):
             ],
             stream=False
         )
+
 
         resp = response.choices[0].message.content
         result = resp
